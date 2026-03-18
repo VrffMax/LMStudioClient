@@ -1,0 +1,138 @@
+# Input Testing Guide - LM Studio Client
+
+This file documents how to test the LM Studio Client with piped input.
+
+## Testing via Piped Input
+
+### Basic Test (Echo Command)
+On **Windows PowerShell**:
+```powershell
+echo "Hello" | dotnet run --project src/Program.cs
+```
+
+Or using the compiled executable:
+```powershell
+.\publish\win-x64\LMStudioClient.exe < input.txt
+```
+
+On **Linux/macOS (bash)**:
+```bash
+echo "Hello" | ./LMStudioClient
+# or
+cat input.txt | dotnet run --project src/Program.cs
+```
+
+### Test with Exit Command
+To test the `exit` command that terminates the chat session:
+
+**Windows PowerShell:**
+```powershell
+$null = echo "test message" ; echo "exit" ; (echo "" | dotnet run --no-build) 2>&1 || true
+```
+
+Or simpler:
+```powershell
+(echo "Hello"; echo "exit") | dotnet run --project src/Program.cs
+```
+
+**Linux/macOS:**
+```bash
+{ echo "test message" ; echo "exit" ; } | ./LMStudioClient
+```
+
+## Expected Behavior
+
+When piping input, the application will:
+
+1. Read "Hello" as a user prompt
+2. Display "Assistant: [response]" (if LM Studio is running) or an error if not
+3. Attempt to read next line - finds "exit"
+4. Print "Goodbye!" and terminate gracefully
+
+## Sample Test Cases
+
+### Case 1: Simple Greeting
+```bash
+echo "What is 2+2?" | ./LMStudioClient
+```
+
+**Expected:** Application processes prompt, responds (if server running), then exits
+
+### Case 2: Multiple Messages + Exit
+```bash
+{ echo "Hello"; echo "How are you?"; echo "exit" ; } | ./LMStudioClient
+```
+
+**Expected:** Processes both messages sequentially, then terminates on "exit"
+
+### Case 3: Empty Input (Should Just Show Welcome)
+```bash
+echo "" | ./LMStudioClient
+```
+
+**Expected:** Shows welcome message and waits for input (may hang until killed or SIGINT)
+
+## Debugging Tests
+
+### Enable Debug Output with Piped Input
+```bash
+DEBUG=1 echo "test" | ./LMStudioClient
+```
+
+This will show stack traces on any errors.
+
+### Test Error Handling (Connection Refused)
+```bash
+echo "test" | LMSTUDIO_URL=http://invalid:9999 dotnet run --project src/Program.cs
+```
+
+**Expected:** Shows connection error message with helpful LM Studio setup instructions
+
+## Files for Automated Testing
+
+You can create these test files in the project root:
+
+### 1. `tests/basic.txt`
+```text
+Hello, how are you?
+exit
+```
+
+Run test:
+```bash
+cat tests/basic.txt | ./LMStudioClient
+```
+
+### 2. `tests/code_assistant.txt`
+```text
+Write a C# method to reverse an array
+exit
+```
+
+Run test:
+```bash
+cat tests/code_assistant.txt | ./LMStudioClient --system "You are a coding assistant"
+```
+
+## Verification Checklist
+
+After running piped input tests, verify:
+
+- [ ] Application starts without errors (when LM Studio is not running)
+- [ ] Input messages are processed correctly
+- [ ] Exit command terminates cleanly
+- [ ] Error messages display properly when server unavailable
+- [ ] No hanging processes remain after test completion
+
+## Notes
+
+1. **Piping vs Interactive**: Piped input is better for automated testing; interactive mode requires manual typing and cannot be fully automated without additional tools like `expect`.
+
+2. **Streaming Mode**: The `--stream` flag may behave differently with piped input since there's no cursor to update. Consider using non-streaming mode (`--no-stream`) for reliable tests.
+
+3. **Timeouts**: For long-running processes in CI/CD, set a timeout:
+   ```bash
+   echo "test" | timeout 10 ./LMStudioClient || echo "Timed out or exited"
+   ```
+
+4. **Alternative Testing Framework**: Consider using PowerShell's `Start-Process` with `-ArgumentList` for more control over input/output in automated tests.

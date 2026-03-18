@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>LMStudioClient</AssemblyName>
+    <RootNamespace>LMStudioClient</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup><!-- No external dependencies needed - using .NET 8 built-in capabilities -->
+    <!-- System.Net.Http for HTTP requests and streaming -->
+    <!-- System.Text.Json for JSON serialization -->
+  
+    <None Remove="nul" />
+  </ItemGroup>
+
+</Project>

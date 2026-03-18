@@ -1,0 +1,14 @@
+C:\Playground\LibRuWorkspace\LMStudioClient\src\bin\Debug\net8.0\LMStudioClient.exe
+C:\Playground\LibRuWorkspace\LMStudioClient\src\bin\Debug\net8.0\LMStudioClient.deps.json
+C:\Playground\LibRuWorkspace\LMStudioClient\src\bin\Debug\net8.0\LMStudioClient.runtimeconfig.json
+C:\Playground\LibRuWorkspace\LMStudioClient\src\bin\Debug\net8.0\LMStudioClient.dll
+C:\Playground\LibRuWorkspace\LMStudioClient\src\bin\Debug\net8.0\LMStudioClient.pdb
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\LMStudioClient.GeneratedMSBuildEditorConfig.editorconfig
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\LMStudioClient.AssemblyInfoInputs.cache
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\LMStudioClient.AssemblyInfo.cs
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\LMStudioClient.csproj.CoreCompileInputs.cache
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\LMStudioClient.dll
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\refint\LMStudioClient.dll
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\LMStudioClient.pdb
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\LMStudioClient.genruntimeconfig.cache
+C:\Playground\LibRuWorkspace\LMStudioClient\src\obj\Debug\net8.0\ref\LMStudioClient.dll

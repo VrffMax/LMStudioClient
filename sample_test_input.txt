@@ -1,0 +1,98 @@
+# Sample Test Input for LM Studio Client Piping Tests
+
+## How to Use This File
+
+### Windows PowerShell
+```powershell
+type sample_test_input.txt | dotnet run --project src/
+```
+
+Or using the compiled executable:
+```powershell
+.\publish\win-x64\LMStudioClient.exe < sample_test_input.txt
+```
+
+### Linux/macOS (bash)
+```bash
+cat sample_test_input.txt | ./LMStudioClient
+# or
+dotnet run --project src/ < sample_test_input.txt
+```
+
+## Test Input Content
+
+Hello, how are you?
+This is a test message to verify piped input works correctly.
+exit
+
+## Expected Behavior
+
+1. Application reads "Hello, how are you?" as the first user prompt
+2. If LM Studio server is running (localhost:1234), displays assistant response
+3. Reads second message about testing piped input
+4. Processes it and shows another assistant response (if available)
+5. Detects "exit" command and terminates gracefully with "Goodbye!"
+
+## Alternative Test Cases
+
+### Case 1: Multiple Questions
+```text
+What is machine learning?
+How does C# differ from Java?
+Write a simple program
+exit
+```
+
+### Case 2: Custom System Prompt
+Create `sample_test_input.txt` with custom system prompt first:
+```text
+System: You are a helpful coding assistant.
+Question: How do I read a file in C#?
+exit
+```
+
+Run with:
+```bash
+dotnet run --system "You are a helpful coding assistant" < sample_test_input.txt
+```
+
+### Case 3: Error Testing (Server Unavailable)
+If LM Studio is not running, test error handling:
+```text
+test message
+another test
+exit
+```
+
+Expected result: Connection refused error with helpful instructions
+
+## Verification Steps
+
+After running the piped input test:
+
+1. [ ] Application starts without hanging indefinitely
+2. [ ] Messages are processed in order (first to last)
+3. [ ] "exit" command terminates cleanly
+4. [ ] No zombie processes remain after test completion
+5. [ ] Error messages display correctly if server unavailable
+
+## Notes
+
+- This file should be placed in the project root directory for easy access
+- Use `type sample_test_input.txt | dotnet run` for quick testing on Windows
+- The "exit" command is required to terminate interactive mode when piping input
+- For automated CI/CD tests, consider using PowerShell's Start-Process with argument redirection
+
+## Troubleshooting
+
+### Application hangs after reading all input
+**Solution**: Ensure "exit" command is included at the end of your input file
+
+### No output appears for messages
+**Solution**: LM Studio server must be running on localhost:1234. Verify with `dotnet run --list-models`
+
+### Connection refused errors
+**Solution**: Start LM Studio application first, or specify custom URL with `--url` parameter
+```bash
+dotnet run --url "http://localhost:1234" < sample_test_input.txt
+```
