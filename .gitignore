@@ -1,0 +1,12 @@
+# Build results
+bin/
+obj/
+publish/
+*.dll
+*.exe
+*.pdb
+.vs/
+*.suo
+*.user
+project.lock.json
+artifacts/
