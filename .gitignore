@@ -1,4 +1,4 @@
-# Build results
+```# Build results
 bin/
 obj/
 publish/
@@ -11,10 +11,8 @@ publish/
 # Visual Studio / .NET 8 IDE files
 .vs/
 *.suo
-*.user
-.userprefs
+*.userprefs
 .userosscache
-*.sln.docstates
 
 # Solution and project files (optional - uncomment if you don't want to track them)
 # *.sln
@@ -38,7 +36,6 @@ logs/
 
 # Environment variables
 .env
-*.env.local
 !.env.example
 .env.production
 
@@ -68,8 +65,11 @@ generated/
 .vscode/**
 .idea/
 *.iml
-*.iws
 *.ipr
+*.iws
 
 # NuGet cache (optional - uncomment if you want to exclude it)
-# .nuget/packages/*/contentFiles/**/*.dll
+#.nuget/packages/*/contentFiles/**/*.dll
+
+# Project user settings (do not commit these)
+*.csproj.user
