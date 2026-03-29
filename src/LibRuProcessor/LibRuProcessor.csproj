@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>LMStudioClient.LibRuProcessor</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LMStudioClient.csproj" />
+  </ItemGroup>
+
+  <!-- Note: SevenZipSharp package would be used here for .7z support -->
+  <!-- Add: <PackageReference Include="SevenZipSharp" Version="20.1.0" /><!-- Uncomment when available -->
+</Project>
